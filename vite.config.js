@@ -1,17 +1,20 @@
+import { fileURLToPath, URL } from 'node:url'
+
 import { defineConfig } from 'vite'
-import path from 'path'
 import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  plugins: [vue()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  plugins: [vue()],
   // 解决跨域问题
   server: {
+    open: true,
+    port: 8088,
     proxy: {
       '/api': {
         target: 'http://localhost:8080',
