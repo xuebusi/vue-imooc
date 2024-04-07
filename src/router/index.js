@@ -1,14 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import LoginVue from '../pages/Login.vue'
-import RegisterVue from '../pages/Register.vue'
-import HomeVue from '../pages/Home.vue'
-import NewsVue from '../pages/News.vue'
-import UsersVue from '../pages/Users.vue'
-import DetailVue from '../pages/Detail.vue'
+import NotFound from '@/pages/404.vue'
+import LoginVue from '@/pages/Login.vue'
+import RegisterVue from '@/pages/Register.vue'
+import HomeVue from '@/pages/Home.vue'
+import NewsVue from '@/pages/News.vue'
+import UsersVue from '@/pages/Users.vue'
+import DetailVue from '@/pages/Detail.vue'
 
 const routes = [
-    { path: '/', redirect: '/home'}, 
+    { path: '/', redirect: '/home' },
     { path: '/home', component: HomeVue },
     { path: '/login', component: LoginVue },
     { path: '/register', component: RegisterVue },
@@ -23,6 +24,8 @@ const routes = [
         }]
     },
     { path: '/users', component: UsersVue },
+    // 404页面
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
 ]
 
 const router = createRouter({
