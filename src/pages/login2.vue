@@ -15,10 +15,22 @@
             </div>
             <el-form :model="form" class="w-[250px]">
                 <el-form-item>
-                    <el-input v-model="form.username" placeholder="请输入用户名" />
+                    <el-input v-model="form.username" placeholder="请输入用户名">
+                        <template #prefix>
+                            <el-icon>
+                                <User />
+                            </el-icon>
+                        </template>
+                    </el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-input v-model="form.password" placeholder="请输入密码" />
+                    <el-input v-model="form.password" placeholder="请输入密码">
+                        <template #prefix>
+                            <el-icon>
+                                <Lock />
+                            </el-icon>
+                        </template>
+                    </el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button round color="#626aef" class="w-[250px]" type="primary" @click="onSubmit">登 录</el-button>
