@@ -3,6 +3,7 @@ import querystring from "querystring";
 
 // 创建axios实例
 const instance = axios.create({
+    baseURL: '/api',
     timeout: 5000
 });
 

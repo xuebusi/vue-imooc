@@ -33,7 +33,7 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button round color="#626aef" class="w-[250px]" type="primary" @click="login">登 录</el-button>
+                    <el-button round color="#626aef" class="w-[250px]" type="primary" @click="doLogin">登 录</el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -41,7 +41,12 @@
 </template>
 
 <script setup>
+import { ElNotification } from 'element-plus'
+import { useRouter } from 'vue-router'
 import { ref, reactive } from 'vue'
+import api from '@/api'
+
+const router = useRouter()
 
 // do not use same name with ref
 const form = reactive({
@@ -67,9 +72,29 @@ const rules = ref({
     ]
 })
 
-const login = () => {
+const doLogin = () => {
     formRef.value.validate((valid) => {
-        console.log(valid);
+        if (!valid) {
+            return false
+        }
+        api.login(form.username, form.password)
+            .then(res => {
+                console.log(res);
+                ElNotification({
+                    message: '登录成功',
+                    type: 'success',
+                    duration: 3000,
+                })
+                router.push('/')
+            })
+            .catch(err => {
+                console.log(err);
+                ElNotification({
+                    message: err.response.data.message || '请求失败',
+                    type: 'error',
+                    duration: 3000,
+                })
+            })
     })
 }
 </script>

@@ -1,10 +1,16 @@
 import axios from "axios";
-import path from './path';
 
 const api = {
     // 测试请求
     getUsers() {
-        return axios.get(path.baseUrl + path.users);
+        return axios.get('https://api.github.com/users');
+    },
+    // 登录
+    login(username, password) {
+        return axios.post('/admin/login', {
+            username,
+            password
+        })
     }
 }
 
