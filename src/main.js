@@ -9,6 +9,8 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
+import 'virtual:windi.css'
+
 import { createPinia } from 'pinia'
 const pinia = createPinia()
 

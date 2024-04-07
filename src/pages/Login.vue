@@ -7,8 +7,11 @@ const username = ref('')
 const password = ref('')
 const rememberMe = ref(false)
 
+let isLogin = ref(false)
+
 const login = () => {
     console.log('登录表单:', username.value, password.value, rememberMe.value);
+    isLogin.value = true
     router.push({
         path: '/home'
     })
