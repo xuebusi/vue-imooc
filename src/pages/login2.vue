@@ -13,8 +13,8 @@
                 <span class="">账号密码登录</span>
                 <span class="h-[1px] w-16 bg-gray-200"></span>
             </div>
-            <el-form :model="form" class="w-[250px]">
-                <el-form-item>
+            <el-form ref="formRef" :rules="rules" :model="form" class="w-[250px]">
+                <el-form-item prop="username">
                     <el-input v-model="form.username" placeholder="请输入用户名">
                         <template #prefix>
                             <el-icon>
@@ -23,8 +23,8 @@
                         </template>
                     </el-input>
                 </el-form-item>
-                <el-form-item>
-                    <el-input v-model="form.password" placeholder="请输入密码">
+                <el-form-item prop="password">
+                    <el-input type="password" v-model="form.password" placeholder="请输入密码" show-password>
                         <template #prefix>
                             <el-icon>
                                 <Lock />
@@ -33,7 +33,7 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button round color="#626aef" class="w-[250px]" type="primary" @click="onSubmit">登 录</el-button>
+                    <el-button round color="#626aef" class="w-[250px]" type="primary" @click="login">登 录</el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { ref, reactive } from 'vue'
 
 // do not use same name with ref
 const form = reactive({
@@ -49,17 +49,29 @@ const form = reactive({
     password: '',
 })
 
-const onSubmit = () => {
-    console.log('submit!')
+const formRef = ref()
+const rules = ref({
+    username: [
+        {
+            required: true,
+            message: '用户名不能为空',
+            trigger: 'blur'
+        }
+    ],
+    password: [
+        {
+            required: true,
+            message: '密码不能为空',
+            trigger: 'blur'
+        }
+    ]
+})
+
+const login = () => {
+    formRef.value.validate((valid) => {
+        console.log(valid);
+    })
 }
 </script>
 
-<style scoped>
-.box {
-    @apply py-8 px-8 inline-flex mx-auto bg-white dark:bg-gray-400 dark:bg-opacity-10 rounded-xl shadow-md space-y-2;
-}
-
-.btn {
-    @apply px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 dark:border-purple-800 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 ring-purple-600 ring-opacity-40;
-}
-</style>
+<style scoped></style>
