@@ -1,13 +1,13 @@
-import axios from "axios";
+import request from '../util/request.js'
 
 const api = {
     // 测试请求
     getUsers() {
-        return axios.get('https://api.github.com/users');
+        return request.get('https://api.github.com/users');
     },
     // 登录
     login(username, password) {
-        return axios.post('/admin/login', {
+        return request.post('/admin/login', {
             username,
             password
         })

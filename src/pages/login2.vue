@@ -41,17 +41,20 @@
 </template>
 
 <script setup>
-import { ElNotification } from 'element-plus'
 import { useRouter } from 'vue-router'
+import { useCookies } from '@vueuse/integrations/useCookies'
 import { ref, reactive } from 'vue'
 import api from '@/api'
 
 const router = useRouter()
 
+const cookie = useCookies()
+console.log(cookie);
+
 // do not use same name with ref
 const form = reactive({
-    username: '',
-    password: '',
+    username: 'admin',
+    password: '123456',
 })
 
 const formRef = ref()
@@ -79,21 +82,16 @@ const doLogin = () => {
         }
         api.login(form.username, form.password)
             .then(res => {
-                console.log(res);
+                console.log(res.data.data);
+                // 设置Cookie
+                cookie.set('admin-token', res.data.data)
+
                 ElNotification({
                     message: '登录成功',
                     type: 'success',
                     duration: 3000,
                 })
                 router.push('/')
-            })
-            .catch(err => {
-                console.log(err);
-                ElNotification({
-                    message: err.response.data.message || '请求失败',
-                    type: 'error',
-                    duration: 3000,
-                })
             })
     })
 }

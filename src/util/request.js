@@ -1,9 +1,11 @@
 import axios from "axios";
 import querystring from "querystring";
+import { ElNotification } from 'element-plus'
+import { useCookies } from '@vueuse/integrations/useCookies'
 
 // 创建axios实例
 const instance = axios.create({
-    baseURL: '/api',
+    baseURL: 'http://localhost:8088/api',
     timeout: 5000
 });
 
@@ -36,6 +38,13 @@ const errorHandle = (status, info) => {
 // 请求拦截器
 instance.interceptors.request.use(
     config => {
+        // 设置请求头
+        const cookie = useCookies()
+        const token = cookie.get('admin-token')
+        if (token) {
+            config.headers['token'] = token
+        }
+
         if (config.method == 'post') {
             config.data = querystring.stringify(config.data)
         }
@@ -56,6 +65,11 @@ instance.interceptors.response.use(
 
     error => {
         const { response } = error;
+        ElNotification({
+            message: response.data.message || '请求失败',
+            type: 'error',
+            duration: 3000,
+        })
         errorHandle(response.status, response.info);
     }
 )
