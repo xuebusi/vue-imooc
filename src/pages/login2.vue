@@ -42,14 +42,12 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import { useCookies } from '@vueuse/integrations/useCookies'
+import auth from '../util/auth.js'
 import { ref, reactive } from 'vue'
 import api from '@/api'
+import { ElNotification } from 'element-plus'
 
 const router = useRouter()
-
-const cookie = useCookies()
-console.log(cookie);
 
 // do not use same name with ref
 const form = reactive({
@@ -83,8 +81,7 @@ const doLogin = () => {
         api.login(form.username, form.password)
             .then(res => {
                 console.log(res.data.data);
-                // 设置Cookie
-                cookie.set('admin-token', res.data.data)
+                auth.setToken(res.data.data)
 
                 ElNotification({
                     message: '登录成功',

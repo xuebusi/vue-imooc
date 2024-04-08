@@ -1,7 +1,7 @@
 import axios from "axios";
 import querystring from "querystring";
+import auth from '../util/auth.js'
 import { ElNotification } from 'element-plus'
-import { useCookies } from '@vueuse/integrations/useCookies'
 
 // 创建axios实例
 const instance = axios.create({
@@ -39,8 +39,7 @@ const errorHandle = (status, info) => {
 instance.interceptors.request.use(
     config => {
         // 设置请求头
-        const cookie = useCookies()
-        const token = cookie.get('admin-token')
+        const token = auth.getToken()
         if (token) {
             config.headers['token'] = token
         }
