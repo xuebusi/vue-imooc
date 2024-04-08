@@ -42,7 +42,7 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import auth from '../util/auth.js'
+import { setToken } from '@/util/auth'
 import { ref, reactive } from 'vue'
 import api from '@/api'
 import { ElNotification } from 'element-plus'
@@ -81,7 +81,7 @@ const doLogin = () => {
         api.login(form.username, form.password)
             .then(res => {
                 console.log(res.data.data);
-                auth.setToken(res.data.data)
+                setToken(res.data.data)
 
                 ElNotification({
                     message: '登录成功',

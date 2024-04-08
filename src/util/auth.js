@@ -4,19 +4,15 @@ const cookie = useCookies()
 
 const tokenKey = 'admin-token'
 
-const auth = {
-    // 设置Token
-    setToken: (token) => {
-        cookie.set(tokenKey, token)
-    },
-    // 获取Token
-    getToken: () => {
-        return cookie.get(tokenKey)
-    },
-    // 移除Token
-    removeToken: () => {
-        cookie.remove(tokenKey)
-    }
+// 设置Token
+export function setToken(token) {
+    cookie.set(tokenKey, token)
 }
-
-export default auth;
+// 获取Token
+export function getToken() {
+    return cookie.get(tokenKey)
+}
+// 移除Token
+export function removeToken() {
+    cookie.remove(tokenKey)
+}

@@ -1,6 +1,6 @@
 import axios from "axios";
 import querystring from "querystring";
-import auth from '../util/auth.js'
+import { getToken } from '@/util/auth'
 import { ElNotification } from 'element-plus'
 
 // 创建axios实例
@@ -39,7 +39,7 @@ const errorHandle = (status, info) => {
 instance.interceptors.request.use(
     config => {
         // 设置请求头
-        const token = auth.getToken()
+        const token = getToken()
         if (token) {
             config.headers['token'] = token
         }
