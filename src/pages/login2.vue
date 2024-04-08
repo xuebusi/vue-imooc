@@ -46,8 +46,10 @@ import { setToken } from '@/util/auth'
 import { ref, reactive } from 'vue'
 import api from '@/api'
 import { ElNotification } from 'element-plus'
+import { useStore } from 'vuex'
 
 const router = useRouter()
+const store = useStore()
 
 // do not use same name with ref
 const form = reactive({
@@ -82,6 +84,11 @@ const doLogin = () => {
             .then(res => {
                 console.log(res.data.data);
                 setToken(res.data.data)
+
+                api.getinfo().then(res => {
+                    console.log(res.data.data);
+                    store.commit('setUser', res.data.data)
+                })
 
                 ElNotification({
                     message: '登录成功',

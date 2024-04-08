@@ -11,6 +11,10 @@ const api = {
             username,
             password
         })
+    },
+    // 获取用户信息
+    getinfo() {
+        return request.post('/admin/getinfo')
     }
 }
 
