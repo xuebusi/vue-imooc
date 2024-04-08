@@ -1,7 +1,7 @@
 import axios from "axios";
 import querystring from "querystring";
 import { getToken } from '@/util/auth'
-import { ElNotification } from 'element-plus'
+import toast from '@/util/util'
 
 // 创建axios实例
 const instance = axios.create({
@@ -64,11 +64,8 @@ instance.interceptors.response.use(
 
     error => {
         const { response } = error;
-        ElNotification({
-            message: response.data.message || '请求失败',
-            type: 'error',
-            duration: 3000,
-        })
+
+        toast(response.data.msg || '请求失败', 'error')
         errorHandle(response.status, response.info);
     }
 )

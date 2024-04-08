@@ -45,7 +45,7 @@ import { useRouter } from 'vue-router'
 import { setToken } from '@/util/auth'
 import { ref, reactive } from 'vue'
 import api from '@/api'
-import { ElNotification } from 'element-plus'
+import toast from '@/util/util'
 import { useStore } from 'vuex'
 
 const router = useRouter()
@@ -90,11 +90,7 @@ const doLogin = () => {
                     store.commit('setUser', res.data.data)
                 })
 
-                ElNotification({
-                    message: '登录成功',
-                    type: 'success',
-                    duration: 3000,
-                })
+                toast('登录成功')
                 router.push('/')
             })
     })
