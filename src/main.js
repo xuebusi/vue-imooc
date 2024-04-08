@@ -15,6 +15,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 // import { createPinia } from 'pinia'
 // const pinia = createPinia()
 import store from './store'
+import '@/util/permission.js'
 
 const app = createApp(App);
 app.use(router)

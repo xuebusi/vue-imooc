@@ -45,7 +45,7 @@ import { useRouter } from 'vue-router'
 import { setToken } from '@/util/auth'
 import { ref, reactive } from 'vue'
 import api from '@/api'
-import toast from '@/util/util'
+import toast from '@/util/notification'
 import { useStore } from 'vuex'
 
 const router = useRouter()
