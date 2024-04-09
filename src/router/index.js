@@ -10,9 +10,27 @@ import Detail from '@/pages/detail.vue'
 
 const routes = [
     { path: '/', redirect: '/home' },
-    { path: '/home', component: Home },
-    { path: '/login', component: Login },
-    { path: '/register', component: Register },
+    { 
+        path: '/home', 
+        component: Home,
+        meta: {
+            title: '首页'
+        }
+    },
+    { 
+        path: '/login', 
+        component: Login,
+        meta: {
+            title: '登录'
+        }
+    },
+    { 
+        path: '/register', 
+        component: Register,
+        meta: {
+            title: '注册'
+        }
+    },
     {
         path: '/news',
         component: News,
@@ -23,9 +41,22 @@ const routes = [
             props: true,
         }]
     },
-    { path: '/users', component: Users },
+    { 
+        path: '/users', 
+        component: Users,
+        meta: {
+            title: '用户列表'
+        }
+     },
     // 404页面
-    { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
+    { 
+        path: '/:pathMatch(.*)*', 
+        name: 'NotFound', 
+        component: NotFound,
+        meta: {
+            title: '错误页面'
+        }
+    },
 ]
 
 const router = createRouter({

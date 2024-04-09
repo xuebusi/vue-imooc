@@ -29,6 +29,9 @@ router.beforeEach(async (to, from, next) => {
     if (token) {
         await store.dispatch('getinfo')
     }
+    // 页面标题
+    let title = (to.meta.title ? to.meta.title : '') + '-学不死的程序员'
+    document.title = title
 
     next()
 })
