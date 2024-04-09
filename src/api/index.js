@@ -1,4 +1,4 @@
-import request from '../util/request.js'
+import request from '@/util/request.js'
 
 const api = {
     // 测试请求

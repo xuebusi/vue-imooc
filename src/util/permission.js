@@ -1,7 +1,7 @@
 import router from '@/router'
 import { getToken } from '@/util/auth'
-import store from '../store';
-import toast from '../util/notification'
+import store from '@/store';
+import toast from '@/util/notification'
 
 router.beforeEach(async (to, from, next) => {
     console.log('全局导航守卫');
