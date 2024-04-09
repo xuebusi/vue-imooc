@@ -1,6 +1,7 @@
 import { ElNotification } from 'element-plus'
+import nprogress from 'nprogress'
 
-const toast = (message, type = 'success') => {
+export function toast(message, type = 'success') {
     ElNotification({
         message,
         type,
@@ -8,4 +9,10 @@ const toast = (message, type = 'success') => {
     })
 }
 
-export default toast
+export function showFullLoading() {
+    nprogress.start()
+}
+
+export function hideFullLoading() {
+    nprogress.done()
+}

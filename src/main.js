@@ -16,6 +16,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 // const pinia = createPinia()
 import store from './store'
 import '@/util/permission.js'
+import 'nprogress/nprogress.css'
 
 const app = createApp(App);
 app.use(router)

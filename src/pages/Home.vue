@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import api from '../api'
 
-import toast from '@/util/common'
+import { toast } from '@/util/common'
 import { useRouter } from 'vue-router'
 import { removeToken } from '../util/auth'
 

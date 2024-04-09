@@ -1,10 +1,15 @@
 import router from '@/router'
 import { getToken } from '@/util/auth'
 import store from '@/store';
-import toast from '@/util/common'
+import { toast, showFullLoading, hideFullLoading } from '@/util/common'
 
+// 全局前置守卫
 router.beforeEach(async (to, from, next) => {
-    console.log('全局导航守卫');
+    console.log('全局前置守卫');
+
+    // 显示全局loading
+    showFullLoading()
+
     const token = getToken()
     console.log('>>>>token:', token);
 
@@ -21,9 +26,17 @@ router.beforeEach(async (to, from, next) => {
     }
 
     // 如何已经登录， 则自动获取用户信息，并存储在vuex中
-    if(token) {
+    if (token) {
         await store.dispatch('getinfo')
     }
 
     next()
+})
+
+// 全局后置守卫
+router.afterEach((to, from) => {
+    console.log('全局后置守卫');
+
+    // 隐藏全局loading
+    hideFullLoading()
 })
