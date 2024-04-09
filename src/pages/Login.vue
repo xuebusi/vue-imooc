@@ -13,7 +13,7 @@ const login = () => {
     console.log('登录表单:', username.value, password.value, rememberMe.value);
     isLogin.value = true
     router.push({
-        path: '/home'
+        path: '/'
     })
 }
 </script>

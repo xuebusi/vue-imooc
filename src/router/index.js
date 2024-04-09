@@ -7,25 +7,29 @@ import Home from '@/pages/home.vue'
 import News from '@/pages/news.vue'
 import Users from '@/pages/users.vue'
 import Detail from '@/pages/detail.vue'
+import Admin from '@/layout/admin.vue'
 
 const routes = [
-    { path: '/', redirect: '/home' },
-    { 
-        path: '/home', 
-        component: Home,
-        meta: {
-            title: '首页'
-        }
+    {
+        path: '/',
+        component: Admin,
+        children: [{
+            path: '/',
+            component: Home,
+            meta: {
+                title: '首页'
+            }
+        }]
     },
-    { 
-        path: '/login', 
+    {
+        path: '/login',
         component: Login,
         meta: {
             title: '登录'
         }
     },
-    { 
-        path: '/register', 
+    {
+        path: '/register',
         component: Register,
         meta: {
             title: '注册'
@@ -41,17 +45,17 @@ const routes = [
             props: true,
         }]
     },
-    { 
-        path: '/users', 
+    {
+        path: '/users',
         component: Users,
         meta: {
             title: '用户列表'
         }
-     },
+    },
     // 404页面
-    { 
-        path: '/:pathMatch(.*)*', 
-        name: 'NotFound', 
+    {
+        path: '/:pathMatch(.*)*',
+        name: 'NotFound',
         component: NotFound,
         meta: {
             title: '错误页面'
