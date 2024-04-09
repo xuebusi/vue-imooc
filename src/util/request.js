@@ -1,7 +1,7 @@
 import axios from "axios";
 import querystring from "querystring";
 import { getToken } from '@/util/auth'
-import toast from '@/util/notification'
+import toast from '@/util/common'
 
 // 创建axios实例
 const instance = axios.create({
