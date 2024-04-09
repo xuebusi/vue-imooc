@@ -1,12 +1,24 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import api from '../api'
 
+const message = ref('用户列表')
+const users = ref([])
+
+onMounted(() => {
+  api.getinfo().then(res => {
+    console.log('>>>', res.data);
+    users.value = res.data;
+  })
+})
 </script>
 
 <template>
-  <h1 class="p-2">用户信息</h1>
-  <br>
-  {{ $store.state.user}}
+  <h1>{{ message }}</h1>
+  <div v-for="user in users" :key="user.id">
+    <p>{{ user.login }}</p>
+    <img :src="user.avatarUrl" :alt="user.login" width="100">
+  </div>
 </template>
 
 <style scoped></style>

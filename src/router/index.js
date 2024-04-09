@@ -19,7 +19,13 @@ const routes = [
             meta: {
                 title: '首页'
             }
-        }]
+        }, {
+            path: '/users',
+            component: Users,
+            meta: {
+                title: '用户'
+            }
+        },]
     },
     {
         path: '/login',
@@ -44,13 +50,6 @@ const routes = [
             component: Detail,
             props: true,
         }]
-    },
-    {
-        path: '/users',
-        component: Users,
-        meta: {
-            title: '用户列表'
-        }
     },
     // 404页面
     {

@@ -1,20 +1,18 @@
 <template>
-    <div class="common-layout">
+    <el-container>
+        <el-header style="padding-left: 0px; padding-right: 0px;">
+            <FHeader />
+        </el-header>
         <el-container>
-            <el-header style="background-color:brown;">
-                <FHeader />
-            </el-header>
-            <el-container>
-                <el-aside width="200px" style="background-color: cadetblue;">
-                    <FMenu />
-                </el-aside>
-                <el-main>
-                    <FTagList />
-                    <router-view></router-view>
-                </el-main>
-            </el-container>
+            <el-aside width="200px" style="background-color: cadetblue;">
+                <FMenu />
+            </el-aside>
+            <el-main>
+                <FTagList />
+                <router-view></router-view>
+            </el-main>
         </el-container>
-    </div>
+    </el-container>
 </template>
 <script setup>
 import FHeader from './components/FHeader.vue';
