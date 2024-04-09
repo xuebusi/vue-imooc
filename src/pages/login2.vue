@@ -33,7 +33,9 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button round color="#626aef" class="w-[250px]" type="primary" @click="doLogin">登 录</el-button>
+                    <el-button round color="#626aef" class="w-[250px]" type="primary" @click="doLogin"
+                        :loading="loading">登
+                        录</el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -43,7 +45,7 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { setToken } from '@/util/auth'
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted, onBeforeUnmount } from 'vue'
 import api from '@/api'
 import toast from '@/util/notification'
 import { useStore } from 'vuex'
@@ -75,11 +77,13 @@ const rules = ref({
     ]
 })
 
+const loading = ref(false)
 const doLogin = () => {
     formRef.value.validate((valid) => {
         if (!valid) {
             return false
         }
+        loading.value = true
         api.login(form.username, form.password)
             .then(res => {
                 console.log(res.data.data);
@@ -93,8 +97,28 @@ const doLogin = () => {
                 toast('登录成功')
                 router.push('/')
             })
+            .finally(() => {
+                loading.value = false
+            })
     })
 }
+
+// 监听回车事件
+function onKeyUp(e) {
+    if (e.key == 'Enter') {
+        doLogin()
+    }
+}
+
+// 添加键盘监听
+onMounted(() => {
+    document.addEventListener('keyup', onKeyUp)
+})
+
+// 移除键盘监听
+onBeforeUnmount(() => {
+    document.removeEventListener('keyup', onKeyUp)
+})
 </script>
 
 <style scoped></style>
