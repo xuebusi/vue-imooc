@@ -89,11 +89,6 @@ const doLogin = () => {
                 console.log(res.data.data);
                 setToken(res.data.data)
 
-                api.getinfo().then(res => {
-                    console.log(res.data.data);
-                    store.commit('setUser', res.data.data)
-                })
-
                 toast('登录成功')
                 router.push('/')
             })
