@@ -1,5 +1,21 @@
 <script setup>
 import { ref } from 'vue';
+import api from '../api'
+
+import toast from '@/util/common'
+import { useRouter } from 'vue-router'
+import { removeToken } from '../util/auth'
+
+const router = useRouter()
+
+function logout() {
+  api.logout()
+
+  removeToken()
+
+  router.push('/login')
+  toast('退出登录成功')
+}
 
 const carouselList = ref([{
   id: 1,
@@ -24,6 +40,7 @@ const carouselList = ref([{
 
 <template>
   <div>
+    <el-button type="danger" plain @click="logout">退出登录</el-button>
     <section>
       <div class="containber">
         <div id="carouselExampleInterval" class="container d-flex carousel slide" data-bs-ride="carousel">

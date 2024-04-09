@@ -48,10 +48,8 @@ import { setToken } from '@/util/auth'
 import { ref, reactive, onMounted, onBeforeUnmount } from 'vue'
 import api from '@/api'
 import toast from '@/util/common'
-import { useStore } from 'vuex'
 
 const router = useRouter()
-const store = useStore()
 
 // do not use same name with ref
 const form = reactive({

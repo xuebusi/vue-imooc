@@ -15,6 +15,10 @@ const api = {
     // 获取用户信息
     getinfo() {
         return request.post('/admin/getinfo')
+    },
+    // 退出登录
+    logout() {
+        request.post('/admin/logout')
     }
 }
 
