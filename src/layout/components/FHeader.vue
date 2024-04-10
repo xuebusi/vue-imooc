@@ -20,7 +20,7 @@
             </el-icon>
             <el-avatar class="ml-2" :size="25" src="https://avatars.githubusercontent.com/u/1?v=4" />
 
-            <el-dropdown class="dropdown">
+            <el-dropdown class="dropdown" @command="handleCommand">
                 <span class="el-dropdown-link">
                     林克
                     <el-icon class="el-icon--right">
@@ -29,8 +29,8 @@
                 </span>
                 <template #dropdown>
                     <el-dropdown-menu>
-                        <el-dropdown-item>修改密码</el-dropdown-item>
-                        <el-dropdown-item>退出登录</el-dropdown-item>
+                        <el-dropdown-item command="changePassword">修改密码</el-dropdown-item>
+                        <el-dropdown-item command="logout">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
@@ -38,7 +38,31 @@
     </div>
 </template>
 <script setup>
+import api from '@/api'
 
+import { ElMessage } from 'element-plus'
+import { toast } from '@/util/common'
+import { useRouter } from 'vue-router'
+import { removeToken } from '@/util/auth'
+
+const router = useRouter()
+
+function logout() {
+    api.logout()
+
+    removeToken()
+
+    router.push('/login')
+    toast('退出登录成功')
+}
+
+const handleCommand = (command) => {
+    if (command === 'changePassword') {
+        ElMessage('点击了修改密码')
+    } else if (command === 'logout') {
+        logout()
+    }
+}
 </script>
 <style scoped>
 .f-header {
