@@ -84,11 +84,21 @@ const doLogin = () => {
         loading.value = true
         api.login(form.username, form.password)
             .then(res => {
-                console.log(res.data.data);
-                setToken(res.data.data)
-
-                toast('登录成功')
-                router.push('/')
+                console.log('res ==> ', res);
+                if (!res) {
+                    return
+                }
+                if (res.status == 200) {
+                    if (res.data.code == 0) {
+                        setToken(res.data.data)
+                        toast('登录成功')
+                        router.push('/')
+                    } else {
+                        toast(res.data.msg, 'error')
+                    }
+                } else {
+                    toast('状态不为200')
+                }
             })
             .finally(() => {
                 loading.value = false

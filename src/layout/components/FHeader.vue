@@ -50,13 +50,13 @@
     </div>
 
     <!-- 修改密码抽屉 -->
-    <el-drawer v-model="showDrawer" title="修改密码" size="45%" :close-on-click-modal="false">
-        <el-form ref="formRef" :rules="rules" :model="form" label-width="80px" size="small">
+    <el-drawer v-model="showDrawer" title="修改密码" size="40%" :close-on-click-modal="false">
+        <el-form ref="formRef" :rules="rules" :model="form" label-width="80px">
             <el-form-item prop="oldpassword" label="旧密码">
                 <el-input v-model="form.oldpassword" placeholder="请输入旧密码">
                     <template #prefix>
                         <el-icon>
-                            <User />
+                            <Lock />
                         </el-icon>
                     </template>
                 </el-input>

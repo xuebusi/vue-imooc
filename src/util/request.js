@@ -63,9 +63,10 @@ instance.interceptors.response.use(
     },
 
     error => {
+        console.log(error);
         const { response } = error;
 
-        toast(response.data.msg || '请求失败', 'error')
+        toast(response.data.error || '请求失败', 'error')
         errorHandle(response.status, response.info);
     }
 )
