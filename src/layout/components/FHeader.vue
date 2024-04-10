@@ -21,9 +21,12 @@
 
 
         <div class="ml-auto flex items-center">
-            <el-tooltip effect="dark" content="全屏" placement="bottom">
-                <el-icon class="icon-btn">
+            <el-tooltip effect="dark" :content="isFullscreen ? '退出全屏' : '全屏'" placement="bottom">
+                <el-icon v-if="!isFullscreen" class="icon-btn" @click="toggle">
                     <FullScreen />
+                </el-icon>
+                <el-icon v-else class="icon-btn" @click="toggle">
+                    <Aim />
                 </el-icon>
             </el-tooltip>
 
@@ -53,6 +56,9 @@ import { ElMessage } from 'element-plus'
 import { toast } from '@/util/common'
 import { useRouter } from 'vue-router'
 import { removeToken } from '@/util/auth'
+
+import { useFullscreen } from '@vueuse/core'
+const { isFullscreen, toggle } = useFullscreen()
 
 // 修改密码和退出登录
 const handleCommand = (command) => {
