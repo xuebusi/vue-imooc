@@ -7,17 +7,26 @@
             骏马编程
         </span>
 
-        <el-icon class="icon-btn">
-            <Fold />
-        </el-icon>
-        <el-icon class="icon-btn">
-            <Refresh />
-        </el-icon>
+        <el-tooltip effect="dark" content="折叠" placement="bottom">
+            <el-icon class="icon-btn">
+                <Fold />
+            </el-icon>
+        </el-tooltip>
+
+        <el-tooltip effect="dark" content="刷新" placement="bottom">
+            <el-icon class="icon-btn">
+                <Refresh />
+            </el-icon>
+        </el-tooltip>
+
 
         <div class="ml-auto flex items-center">
-            <el-icon class="icon-btn">
-                <FullScreen />
-            </el-icon>
+            <el-tooltip effect="dark" content="全屏" placement="bottom">
+                <el-icon class="icon-btn">
+                    <FullScreen />
+                </el-icon>
+            </el-tooltip>
+
             <el-avatar class="ml-2" :size="25" src="https://avatars.githubusercontent.com/u/1?v=4" />
 
             <el-dropdown class="dropdown" @command="handleCommand">
