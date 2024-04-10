@@ -14,7 +14,7 @@
         </el-tooltip>
 
         <el-tooltip effect="dark" content="刷新" placement="bottom">
-            <el-icon class="icon-btn">
+            <el-icon class="icon-btn" @click="handleRefresh">
                 <Refresh />
             </el-icon>
         </el-tooltip>
@@ -79,6 +79,9 @@ function logout() {
     router.push('/login')
     toast('退出登录成功')
 }
+
+// 刷新
+const handleRefresh = () => location.reload()
 </script>
 <style scoped>
 .f-header {
