@@ -29,7 +29,7 @@
                 </span>
                 <template #dropdown>
                     <el-dropdown-menu>
-                        <el-dropdown-item command="changePassword">修改密码</el-dropdown-item>
+                        <el-dropdown-item command="rePassword">修改密码</el-dropdown-item>
                         <el-dropdown-item command="logout">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
@@ -45,8 +45,23 @@ import { toast } from '@/util/common'
 import { useRouter } from 'vue-router'
 import { removeToken } from '@/util/auth'
 
+// 修改密码和退出登录
+const handleCommand = (command) => {
+    switch (command) {
+        case 'rePassword':
+            ElMessage('点击了修改密码')
+            break;
+        case 'logout':
+            logout()
+            break;
+        default:
+            break;
+    }
+}
+
 const router = useRouter()
 
+// 退出登录
 function logout() {
     api.logout()
 
@@ -54,14 +69,6 @@ function logout() {
 
     router.push('/login')
     toast('退出登录成功')
-}
-
-const handleCommand = (command) => {
-    if (command === 'changePassword') {
-        ElMessage('点击了修改密码')
-    } else if (command === 'logout') {
-        logout()
-    }
 }
 </script>
 <style scoped>
