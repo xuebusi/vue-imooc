@@ -48,8 +48,45 @@
             </el-dropdown>
         </div>
     </div>
+
+    <!-- 修改密码抽屉 -->
+    <el-drawer v-model="showDrawer" title="修改密码" size="45%" :close-on-click-modal="false">
+        <el-form ref="formRef" :rules="rules" :model="form" label-width="80px" size="small">
+            <el-form-item prop="oldpassword" label="旧密码">
+                <el-input v-model="form.oldpassword" placeholder="请输入旧密码">
+                    <template #prefix>
+                        <el-icon>
+                            <User />
+                        </el-icon>
+                    </template>
+                </el-input>
+            </el-form-item>
+            <el-form-item prop="password" label="新密码">
+                <el-input type="password" v-model="form.password" placeholder="请输入新密码" show-password>
+                    <template #prefix>
+                        <el-icon>
+                            <Lock />
+                        </el-icon>
+                    </template>
+                </el-input>
+            </el-form-item>
+            <el-form-item prop="repassword" label="确认密码">
+                <el-input type="password" v-model="form.repassword" placeholder="请输入确认密码" show-password>
+                    <template #prefix>
+                        <el-icon>
+                            <Lock />
+                        </el-icon>
+                    </template>
+                </el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="updatePassword" :loading="loading">提交</el-button>
+            </el-form-item>
+        </el-form>
+    </el-drawer>
 </template>
 <script setup>
+import { ref, reactive } from 'vue'
 import api from '@/api'
 
 import { ElMessage } from 'element-plus'
@@ -64,7 +101,8 @@ const { isFullscreen, toggle } = useFullscreen()
 const handleCommand = (command) => {
     switch (command) {
         case 'rePassword':
-            ElMessage('点击了修改密码')
+            // ElMessage('点击了修改密码')
+            showDrawer.value = true
             break;
         case 'logout':
             logout()
@@ -72,6 +110,52 @@ const handleCommand = (command) => {
         default:
             break;
     }
+}
+
+const showDrawer = ref(false)
+
+const form = reactive({
+    oldpassword: '',
+    password: '',
+    repassword: '',
+})
+
+const formRef = ref()
+const rules = ref({
+    oldpassword: [
+        {
+            required: true,
+            message: '旧密码不能为空',
+            trigger: 'blur'
+        }
+    ],
+    password: [
+        {
+            required: true,
+            message: '新密码不能为空',
+            trigger: 'blur'
+        }
+    ],
+    repassword: [
+        {
+            required: true,
+            message: '确认密码不能为空',
+            trigger: 'blur'
+        }
+    ]
+})
+
+const loading = ref(false)
+
+// 修改密码
+const updatePassword = (data) => {
+    formRef.value.validate((valid) => {
+        if (!valid) {
+            return false
+        }
+        // loading.value = true
+
+    })
 }
 
 const router = useRouter()
