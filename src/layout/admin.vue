@@ -4,7 +4,7 @@
             <FHeader />
         </el-header>
         <el-container>
-            <el-aside width="200px" style="background-color: cadetblue;">
+            <el-aside width="250px">
                 <FMenu />
             </el-aside>
             <el-main>
