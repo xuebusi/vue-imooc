@@ -1,7 +1,7 @@
 <template>
     <div class="f-menu" :style="{ width: $store.state.asideWidth }">
-        <el-menu unique-opened :collapse="isCollapse" :default-active="defaultActive" default-active="2" class="border-0"
-            @select="handleSelect" :collapse-transition="false">
+        <el-menu unique-opened :collapse="isCollapse" :default-active="defaultActive" default-active="2"
+            class="border-0" @select="handleSelect" :collapse-transition="false">
             <template v-for="(item, index) in asideMenus" :key="index">
                 <el-sub-menu v-if="item.child && item.child.length > 0" :index="item.name">
                     <template #title>
@@ -31,6 +31,7 @@
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useStore } from 'vuex'
+import api from '@/api'
 
 const router = useRouter()
 const route = useRoute()
@@ -40,23 +41,33 @@ const store = useStore()
 const defaultActive = ref(route.path)
 const isCollapse = computed(() => !(store.state.asideWidth == '250px'))
 
-const asideMenus = [{
-    "name": "后台面板",
-    "icon": "help",
-    "child": [{
-        "name": "主控台",
-        "icon": "home-filled",
-        "frontpath": "/"
-    }]
-}, {
-    "name": "商城管理",
-    "icon": "shopping-bag",
-    "child": [{
-        "name": "商品管理",
-        "icon": "shopping-cart-full",
-        "frontpath": "/goods/list",
-    }]
-}]
+// 侧边菜单
+const asideMenus = ref([])
+
+// 获取用户信息
+api.getinfo()
+    .then(res => {
+        console.log('menus ==>', res.data.data);
+        asideMenus.value = res.data.data.menus
+    })
+
+// const asideMenus = [{
+//     "name": "后台面板",
+//     "icon": "help",
+//     "child": [{
+//         "name": "主控台",
+//         "icon": "home-filled",
+//         "frontpath": "/"
+//     }]
+// }, {
+//     "name": "商城管理",
+//     "icon": "shopping-bag",
+//     "child": [{
+//         "name": "商品管理",
+//         "icon": "shopping-cart-full",
+//         "frontpath": "/goods/list",
+//     }]
+// }]
 
 const handleSelect = (e) => {
     router.push(e)
@@ -71,5 +82,9 @@ const handleSelect = (e) => {
     overflow-y: auto;
     overflow-x: hidden;
     @apply shadow-md fixed bg-light-50;
+}
+
+.f-menu::-webkit-scrollbar {
+    width: 0px;
 }
 </style>

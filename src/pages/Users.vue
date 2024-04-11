@@ -16,8 +16,8 @@ onMounted(() => {
 <template>
   <h1>{{ message }}</h1>
   <div v-for="user in users" :key="user.id">
-    <p>{{ user.login }}</p>
-    <img :src="user.avatarUrl" :alt="user.login" width="100">
+    <p>{{ user.username }}</p>
+    <img :src="user.avatar" :alt="user.username" width="100">
   </div>
 </template>
 
