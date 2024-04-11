@@ -1,6 +1,6 @@
 <template>
     <div class="f-menu" :style="{ width: $store.state.asideWidth }">
-        <el-menu :collapse="isCollapse" :default-active="defaultActive" default-active="2" class="border-0"
+        <el-menu unique-opened :collapse="isCollapse" :default-active="defaultActive" default-active="2" class="border-0"
             @select="handleSelect" :collapse-transition="false">
             <template v-for="(item, index) in asideMenus" :key="index">
                 <el-sub-menu v-if="item.child && item.child.length > 0" :index="item.name">
