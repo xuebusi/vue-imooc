@@ -1,6 +1,6 @@
 <template>
     <div class="f-menu">
-        <el-menu default-active="2" class="border-0">
+        <el-menu default-active="2" class="border-0" @select="handleSelect">
             <template v-for="(item, index) in asideMenus" :key="index">
                 <el-sub-menu v-if="item.child && item.child.length > 0" :index="item.name">
                     <template #title>
@@ -27,6 +27,10 @@
     </div>
 </template>
 <script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
 const asideMenus = [{
     "name": "后台面板",
     "icon": "help",
@@ -45,7 +49,10 @@ const asideMenus = [{
     }]
 }]
 
-
+const handleSelect = (e) => {
+    console.log(e);
+    router.push(e)
+}
 </script>
 <style scoped>
 .f-menu {
