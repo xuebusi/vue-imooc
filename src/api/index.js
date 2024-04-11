@@ -19,6 +19,10 @@ const api = {
     // 退出登录
     logout() {
         request.post('/admin/logout')
+    },
+    // 修改密码
+    updatePassword(data) {
+        return request.post('/admin/updatePassword', data)
     }
 }
 

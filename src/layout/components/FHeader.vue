@@ -148,13 +148,19 @@ const rules = ref({
 const loading = ref(false)
 
 // 修改密码
-const updatePassword = (data) => {
+const updatePassword = () => {
     formRef.value.validate((valid) => {
         if (!valid) {
             return false
         }
         // loading.value = true
-
+        api.updatePassword(form)
+            .then(res => {
+                console.log('修改密码res ==>', res);
+                removeToken()
+                router.push('/login')
+                toast('密码修改成功，请重新登录！')
+            })
     })
 }
 
